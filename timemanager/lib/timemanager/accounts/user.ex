@@ -1,6 +1,5 @@
 defmodule Timemanager.Accounts.User do
   use Ecto.Schema
-  import Ecto.Changeset
 
   schema "users" do
     field :username, :string
@@ -10,9 +9,10 @@ defmodule Timemanager.Accounts.User do
   end
 
   @doc false
-  def changeset(user, attrs) do
+  def changeset(user, params \\ %{}) do
     user
-    |> cast(attrs, [:username, :email])
-    |> validate_required([:username, :email])
+    |> Ecto.Changeset.cast(params, [:username, :email])
+    |> Ecto.Changeset.validate_required([:username, :email], message: "can't be null")
+    |> Ecto.Changeset.validate_format(:email, ~r/^[^@\s]+@[^@\s]+\.[^@\s]+$/, message: "X@X.X")
   end
 end

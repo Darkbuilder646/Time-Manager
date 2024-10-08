@@ -17,9 +17,28 @@ defmodule Timemanager.Accounts do
       [%User{}, ...]
 
   """
-  def list_users do
-    Repo.all(User)
+  def list_users(params) do
+    User
+    |> build_query(params)
+    |> Repo.all()
   end
+
+  defp build_query(query, %{"email" => email, "username" => username}) when is_binary(email) and is_binary(username) do
+    from u in query,
+    where: u.email == ^email and u.username == ^username
+  end
+
+  defp build_query(query, %{"email" => email}) when is_binary(email) do
+    from u in query,
+    where: u.email == ^email
+  end
+
+  defp build_query(query, %{"username" => username}) when is_binary(username) do
+    from u in query,
+    where: u.username == ^username
+  end
+
+  defp build_query(query, _params), do: query
 
   @doc """
   Gets a single user.

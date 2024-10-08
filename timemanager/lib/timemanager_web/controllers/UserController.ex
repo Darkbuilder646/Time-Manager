@@ -20,7 +20,7 @@ defmodule TimemanagerWeb.UserController do
 
   # GET /api/users/:userID
   def show(conn, %{"id" => id}) do
-    case Accounts.get_user(id) do
+    case Accounts.get_user!(id) do
       nil -> send_resp(conn, :not_found, "")
       user -> json(conn, %{data: user})
     end

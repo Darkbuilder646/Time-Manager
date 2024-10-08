@@ -7,13 +7,13 @@ defmodule TimemanagerWeb.UserController do
   action_fallback TimemanagerWeb.FallbackController
 
   # GET /api/users
-  def index(conn, params) do
-    users = Accounts.list_users(params)
-    json(conn, %{data: users})
-  end
+  # def index(conn) do
+  #   users = Accounts.list_users()
+  #   json(conn, %{data: users})
+  # end
 
   # GET /api/users?email=XXX&username=YYY
-  def show(conn, params) do
+  def index(conn, params) do
     users = Accounts.list_users(params)
     json(conn, %{data: users})
   end

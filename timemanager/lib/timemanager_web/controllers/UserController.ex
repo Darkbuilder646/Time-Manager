@@ -4,7 +4,7 @@ defmodule TimemanagerWeb.UserController do
   alias Timemanager.Accounts
   alias Timemanager.Accounts.User
 
-  action_fallback TimemanagerWeb.FallbackController
+  action_fallback(TimemanagerWeb.FallbackController)
 
   # GET /api/users
   # def index(conn) do
@@ -34,6 +34,7 @@ defmodule TimemanagerWeb.UserController do
         |> put_status(:created)
         # |> put_resp_header("location", Routes.user_path(conn, :show, user))
         |> json(%{data: user})
+
       {:error, changeset} ->
         conn
         |> put_status(:unprocessable_entity)
@@ -43,11 +44,15 @@ defmodule TimemanagerWeb.UserController do
 
   # PUT /api/users/:userID
   def update(conn, %{"id" => id, "user" => user_params}) do
-    case Accounts.get_user(id) do
-      nil -> send_resp(conn, :not_found, "")
+    case Accounts.get_user!(id) do
+      nil ->
+        send_resp(conn, :not_found, "")
+
       user ->
         case Accounts.update_user(user, user_params) do
-          {:ok, user} -> json(conn, %{data: user})
+          {:ok, user} ->
+            json(conn, %{data: user})
+
           {:error, changeset} ->
             conn
             |> put_status(:unprocessable_entity)
@@ -58,12 +63,24 @@ defmodule TimemanagerWeb.UserController do
 
   # DELETE /api/users/:userID
   def delete(conn, %{"id" => id}) do
-    case Accounts.get_user(id) do
-      nil -> send_resp(conn, :not_found, "")
+    case Accounts.get_user!(id) do
+      nil ->
+        send_resp(conn, :not_found, "")
+
       user ->
         case Accounts.delete_user(user) do
-          {:ok, _user} -> send_resp(conn, :no_content, "")
-          {:error, _changeset} -> send_resp(conn, :unprocessable_entity, "")
+          {:ok, user} ->
+            conn
+            |> put_status(:ok)
+            |> json(%{message: "User deleted successfully."})
+
+          # send_resp(conn, :no_content, "")
+          {:error, changeset} ->
+            conn
+            |> put_status(:unprocessable_entity)
+            |> json(%{errors: "Unable to delete user."})
+
+            # send_resp(conn, :unprocessable_entity, "")
         end
     end
   end

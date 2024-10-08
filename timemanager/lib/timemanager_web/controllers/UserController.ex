@@ -74,13 +74,10 @@ defmodule TimemanagerWeb.UserController do
             |> put_status(:ok)
             |> json(%{message: "User deleted successfully."})
 
-          # send_resp(conn, :no_content, "")
           {:error, changeset} ->
             conn
             |> put_status(:unprocessable_entity)
             |> json(%{errors: "Unable to delete user."})
-
-            # send_resp(conn, :unprocessable_entity, "")
         end
     end
   end

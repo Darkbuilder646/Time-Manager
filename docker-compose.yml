@@ -1,10 +1,10 @@
 version: '3'
 services:
   postgres:
-    container_name: timemanagerdata
+    container_name: timemanager_dev
     image: postgres
     environment:
-      POSTGRES_DB: timemanager
+      POSTGRES_DB: timemanager_dev
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
     volumes:

@@ -1,11 +1,35 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
+import Select from 'primevue/select'
+
+import { ref } from 'vue'
+
+const selectedCity = ref()
+const cities = ref([
+  { name: 'New York', code: 'NY' },
+  { name: 'Rome', code: 'RM' },
+  { name: 'London', code: 'LDN' },
+  { name: 'Istanbul', code: 'IST' },
+  { name: 'Paris', code: 'PRS' }
+])
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+  <div>
+    HelloWorld
+    <div class="card flex justify-center items-center">
+      <Select
+        v-model="selectedCity"
+        :options="cities"
+        optionLabel="name"
+        placeholder="Select a City"
+        class="w-full flex flex-row items-center space-x-6 md:w-56"
+      ></Select>
+    </div>
+  </div>
+  <!-- <header> -->
+  <!-- <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <div>
       <HelloWorld msg="You did it!" />
@@ -14,14 +38,14 @@ import HelloWorld from './components/HelloWorld.vue'
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
       </nav>
-    </div>
-  </header>
+    </div> -->
+  <!-- </header> -->
 
-  <RouterView />
+  <!-- <RouterView /> -->
 </template>
 
 <style scoped>
-header {
+/* header {
   line-height: 1.5;
   max-height: 100vh;
 }
@@ -81,5 +105,5 @@ nav a:first-of-type {
     padding: 1rem 0;
     margin-top: 1rem;
   }
-}
+} */
 </style>

@@ -6,13 +6,22 @@
     <nav>
       <ul>
         <li class="mb-4">
-          <a href="#" class="block py-2 px-4 font-semibold text-white bg-light_black rounded-full hover:bg-slate-800">Dashboard</a>
+          <a href="#" class="block py-2 px-4 font-semibold space-x-6 text-white bg-light_black rounded-full hover:bg-slate-800">
+            <i class="fa-solid fa-chart-pie"></i>
+            <span>Dashboard</span>
+          </a>
         </li>
         <li class="mb-4">
-          <a href="#" class="block py-2 px-4 font-semibold rounded-md">Teams</a>
+          <a href="#" class="block py-2 px-4 space-x-6 font-semibold rounded-md">
+            <i class="fa-solid fa-user-group"></i>
+            <span>Teams</span>
+          </a>
         </li>
         <li class="mb-4">
-          <a href="#" class="block py-2 px-4 font-semibold rounded-md">Settings</a>
+          <a href="#" class="block py-2 px-4 space-x-6 font-semibold rounded-md">
+            <i class="fa-solid fa-gear"></i>
+            <span>Settings</span>
+          </a>
         </li>
       </ul>
     </nav>

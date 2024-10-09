@@ -12,13 +12,13 @@
           </a>
         </li>
         <li class="mb-4">
-          <a href="#" class="block py-2 px-4 space-x-6 font-semibold rounded-md">
+          <a href="#" class="block py-2 px-4 space-x-6 font-semibold rounded-full hover:bg-slate-200">
             <i class="fa-solid fa-user-group"></i>
             <span>Teams</span>
           </a>
         </li>
         <li class="mb-4">
-          <a href="#" class="block py-2 px-4 space-x-6 font-semibold rounded-md">
+          <a href="#" class="block py-2 px-4 space-x-6 font-semibold rounded-full hover:bg-slate-200">
             <i class="fa-solid fa-gear"></i>
             <span>Settings</span>
           </a>

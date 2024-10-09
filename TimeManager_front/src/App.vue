@@ -15,7 +15,7 @@ import DashboardOverview from './components/Dashboard/Overview.vue'
       <SectionNav />
 
       <!-- Dashboard -->
-      <div class="flex-1 px-4 bg-gray-100">
+      <div class="flex-1 px-4 pb-4 bg-gray-100">
         <DashboardOverview />
       </div>
     </div>

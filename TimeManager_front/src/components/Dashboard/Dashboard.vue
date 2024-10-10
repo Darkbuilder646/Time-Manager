@@ -78,7 +78,7 @@ const chartOptions = {
   </div>
   <div>
     <!-- Grid layout -->
-    <div class="grid grid-rows-3 grid-cols-3 gap-6">
+    <div class="grid  grid-cols-3 gap-6 ">
       <!-- Première ligne -->
       <div class="bg-light_bg shadow rounded-lg p-4 h-[250px] ">
         <div class="h-full">
@@ -94,7 +94,7 @@ const chartOptions = {
       <div class="bg-light_bg shadow rounded-lg p-4 h-[250px]">
         <p>Autre graphique</p>
       </div>
-      <div class="row-span-2 flex justify-center items-start bg-light_bg shadow rounded-lg p-4">
+      <div class="row-span-2 flex justify-center items-start bg-light_bg shadow rounded-lg p-4 ">
         <Calendar expanded :attributes="attrs" :date="date" />
       </div>
 

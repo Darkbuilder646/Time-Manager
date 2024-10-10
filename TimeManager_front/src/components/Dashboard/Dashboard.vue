@@ -4,6 +4,7 @@ import { Calendar } from 'v-calendar'
 import 'v-calendar/style.css'
 import WorkingTimeTable from './Widgets/WorkingTimeTable.vue'
 import ChartManager from './Charts/ChartManager.vue'
+import TeamsTable from './Widgets/TeamsTable.vue'
 
 const date = ref(new Date())
 
@@ -99,8 +100,12 @@ const chartOptions = {
           tailwind-style="h-[200px] w-full"
         />
       </div>
-      <div class="row-span-2 flex justify-center items-start bg-light_bg shadow rounded-lg p-4">
+      <div class="row-span-2 flex flex-col items-start bg-light_bg shadow rounded-lg p-4">
         <Calendar expanded :attributes="attrs" :date="date" />
+        <div class="my-2 w-full">
+          <p class="text-xl font-semibold">My Teams</p>
+          <TeamsTable />
+        </div>
       </div>
 
       <!-- Deuxième ligne -->

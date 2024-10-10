@@ -23,20 +23,23 @@ onMounted(() => {
   new Chart(ctx, {
     type: 'bar',
     data: props.data,
-    options: props.options,
+    options: { 
+      ...props.options, 
+      maintainAspectRatio: false,
+      responsive: true,
+    }
   });
 });
 
 </script>
 
 <template>
-  <div class="chart">
+  <div class="chart-container">
     <canvas ref="barChart"></canvas>
   </div>
 </template>
 
 <style scoped>
-canvas {
-  aspect-ratio: auto 800/400;
-}
+@import '@css/chart-styles.css';
+
 </style>

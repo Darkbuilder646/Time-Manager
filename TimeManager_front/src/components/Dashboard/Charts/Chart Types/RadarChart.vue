@@ -23,20 +23,22 @@ onMounted(() => {
   new Chart(ctx, {
     type: 'radar',
     data: props.data,
-    options: props.options,
+    options: { 
+      ...props.options, 
+      maintainAspectRatio: false,
+      responsive: true,
+    }
   });
 });
 
 </script>
 
 <template>
-  <div>
+  <div class="chart-container">
     <canvas ref="radarChart"></canvas>
   </div>
 </template>
 
 <style scoped>
-.chart {
-  position: relative;
-}
+@import '@css/chart-styles.css';
 </style>

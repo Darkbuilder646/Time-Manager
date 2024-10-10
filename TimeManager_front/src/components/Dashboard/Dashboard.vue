@@ -59,7 +59,6 @@ const dataBar = {
 
 // Options pour les graphiques
 const chartOptions = {
-  responsive: true,
   plugins: {
     legend: {
       position: 'bottom'
@@ -78,9 +77,9 @@ const chartOptions = {
   </div>
   <div>
     <!-- Grid layout -->
-    <div class="grid  grid-cols-3 gap-6 ">
+    <div class="grid grid-cols-3 gap-6">
       <!-- Première ligne -->
-      <div class="bg-light_bg shadow rounded-lg p-4 h-[250px] ">
+      <div class="bg-light_bg shadow rounded-lg p-4 h-[250px]">
         <div class="h-full">
           <p>Statut des utilisateurs</p>
           <ChartManager
@@ -93,16 +92,30 @@ const chartOptions = {
       </div>
       <div class="bg-light_bg shadow rounded-lg p-4 h-[250px]">
         <p>Autre graphique</p>
+        <ChartManager 
+          chart-type="bar"
+          :data="dataBar"
+          :options="chartOptions"
+          tailwind-style="h-[200px] w-full"
+        />
       </div>
-      <div class="row-span-2 flex justify-center items-start bg-light_bg shadow rounded-lg p-4 ">
+      <div class="row-span-2 flex justify-center items-start bg-light_bg shadow rounded-lg p-4">
         <Calendar expanded :attributes="attrs" :date="date" />
       </div>
 
       <!-- Deuxième ligne -->
-      <div class="col-span-2 bg-light_bg shadow rounded-lg p-4">
-        <p>Grand graphique</p>
-        <ChartManager chart-type="bar" :data="dataBar" :options="chartOptions" tailwind-style="" />
+      <div class="col-span-2 bg-light_bg shadow rounded-lg p-4 h-[300px]">
+        <div class="h-full">
+          <p>Grand graphique</p>
+          <ChartManager
+            chart-type="line"
+            :data="dataBar"
+            :options="chartOptions"
+            tailwind-style="h-[250px] w-full"
+          />
+        </div>
       </div>
+
       <!-- Troisième ligne -->
       <div class="col-span-3 bg-light_bg shadow rounded-lg p-4">
         <WorkingTimeTable />
@@ -112,7 +125,5 @@ const chartOptions = {
 </template>
 
 <style scoped>
-/* .grid > div {
-  max-height: 200px; 
-} */
+
 </style>

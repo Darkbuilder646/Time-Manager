@@ -28,7 +28,6 @@ const attrs = ref([
       </div>
       <div class="bg-light_bg shadow rounded-lg p-4">Data / Chart 2</div>
       <div class="row-span-2 flex justify-center items-start bg-light_bg shadow rounded-lg p-4">
-        <!-- <VCalendar :attributes="attributes" /> -->
         <Calendar expanded :attributes="attrs" :date="date" />
       </div>
 

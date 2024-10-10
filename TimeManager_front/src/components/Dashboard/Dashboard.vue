@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import { Calendar } from 'v-calendar'
 import 'v-calendar/style.css'
-import WorkingTimeTable from './WorkingTimeTable.vue';
+import WorkingTimeTable from './Widgets/WorkingTimeTable.vue';
 
 const date = ref(new Date())
 

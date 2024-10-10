@@ -122,7 +122,7 @@ const getStatusClass = (status) => {
       <tbody class="bg-white divide-y divide-gray-200">
         <tr v-for="(member, index) in members" :key="index">
           <!-- Member Column with Photo + Name -->
-          <td class="px-6 py-4 whitespace-nowrap flex items-center">
+          <td class="px-6 py-4 whitespace-nowrap flex items-center border-b">
             <img class="w-10 h-10 rounded-full mr-4" :src="member.photo" alt="Member photo" />
             <div class="text-sm font-medium text-gray-900">
               {{ member.firstName }} {{ member.lastName }}
@@ -130,7 +130,7 @@ const getStatusClass = (status) => {
           </td>
 
           <!-- Status Column -->
-          <td class="px-6 py-4 whitespace-nowrap">
+          <td class="px-6 py-4 whitespace-nowrap border-b">
             <span
               :class="getStatusClass(member.status)"
               class="px-3 py-1 rounded-full text-xs font-semibold"
@@ -140,17 +140,17 @@ const getStatusClass = (status) => {
           </td>
 
           <!-- Clock In Column -->
-          <td class="px-6 py-4 whitespace-nowrap">
+          <td class="px-6 py-4 whitespace-nowrap border-b">
             <div class="text-sm text-gray-900">{{ member.clockIn }}</div>
           </td>
 
           <!-- Clock Out Column -->
-          <td class="px-6 py-4 whitespace-nowrap">
+          <td class="px-6 py-4 whitespace-nowrap border-b">
             <div class="text-sm text-gray-900">{{ member.clockOut }}</div>
           </td>
 
           <!-- Required Time Column -->
-          <td class="px-6 py-4 whitespace-nowrap">
+          <td class="px-6 py-4 whitespace-nowrap border-b">
             <div class="text-sm text-gray-900">8h</div>
           </td>
         </tr>

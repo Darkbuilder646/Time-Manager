@@ -2,7 +2,6 @@
 import Header from './components/Navigation/Header.vue'
 import SectionNav from './components/Navigation/SectionNav.vue'
 import DashboardOverview from './components/Dashboard/Overview.vue'
-
 </script>
 
 <template>
@@ -11,19 +10,15 @@ import DashboardOverview from './components/Dashboard/Overview.vue'
     <Header></Header>
     <!-- Main Content -->
     <div class="flex flex-1">
-      <!-- Sidebar -->
+      <!-- Sidebar Section -->
       <SectionNav />
-
-      <!-- Dashboard -->
-      <div class="flex-1 px-4 pb-4 bg-gray-100">
+      
+      <!-- Dashboard Content -->
+      <div class="flex-1 pr-4 pb-4 pl-4 bg-gray-100">
         <DashboardOverview />
       </div>
     </div>
   </div>
-
-    
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

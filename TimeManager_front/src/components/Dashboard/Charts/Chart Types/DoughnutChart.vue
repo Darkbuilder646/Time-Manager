@@ -23,19 +23,30 @@ onMounted(() => {
   new Chart(ctx, {
     type: 'doughnut',
     data: props.data,
-    options: props.options,
+    options: { 
+      ...props.options, 
+      maintainAspectRatio: false,
+      responsive: true,
+    }
+
   })
 })
 </script>
 
 <template>
-  <div>
-    <canvas ref="doughutChart"></canvas>
+  <div class="chart-container">
+    <canvas height="250px" ref="doughutChart"></canvas>
   </div>
 </template>
 
 <style scoped>
-.chart {
+.chart-container {
   position: relative;
+  width: 100%;  /* Prend 100% de la largeur du parent */
+  height: 100%; /* Prend 100% de la hauteur du parent */
+}
+canvas {
+  width: 100% !important;  /* Le canvas s'adapte à 100% de la largeur */
+  height: 100% !important; /* Le canvas s'adapte à 100% de la hauteur */
 }
 </style>

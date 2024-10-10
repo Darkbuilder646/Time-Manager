@@ -30,13 +30,13 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>
+  <div class="chart">
     <canvas ref="barChart"></canvas>
   </div>
 </template>
 
 <style scoped>
-.chart {
-  position: relative;
+canvas {
+  aspect-ratio: auto 800/400;
 }
 </style>

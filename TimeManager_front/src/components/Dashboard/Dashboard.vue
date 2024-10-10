@@ -80,35 +80,31 @@ const chartOptions = {
     <!-- Grid layout -->
     <div class="grid grid-rows-3 grid-cols-3 gap-6">
       <!-- Première ligne -->
-      <div class="bg-light_bg shadow rounded-lg p-4 h-full">
-        <p>Statut des utilisateurs</p>
-        <div class="flex justify-center">
+      <div class="bg-light_bg shadow rounded-lg p-4 h-[250px] ">
+        <div class="h-full">
+          <p>Statut des utilisateurs</p>
           <ChartManager
             chart-type="doughnut"
             :data="chartData"
             :options="chartOptions"
-            tailwind-style=""
+            tailwind-style="h-[200px] w-full"
           />
         </div>
       </div>
-      <div class="bg-light_bg shadow rounded-lg p-4 h-full">
+      <div class="bg-light_bg shadow rounded-lg p-4 h-[250px]">
         <p>Autre graphique</p>
       </div>
-      <div class="row-span-2 flex justify-center items-start bg-light_bg shadow rounded-lg p-4 h-full">
+      <div class="row-span-2 flex justify-center items-start bg-light_bg shadow rounded-lg p-4">
         <Calendar expanded :attributes="attrs" :date="date" />
       </div>
 
       <!-- Deuxième ligne -->
-      <div class="col-span-2 bg-light_bg shadow rounded-lg p-4 h-full">
+      <div class="col-span-2 bg-light_bg shadow rounded-lg p-4">
         <p>Grand graphique</p>
-        <ChartManager 
-          chart-type="bar" 
-          :data="dataBar" 
-          :options="chartOptions" 
-          tailwind-style="" />
+        <ChartManager chart-type="bar" :data="dataBar" :options="chartOptions" tailwind-style="" />
       </div>
       <!-- Troisième ligne -->
-      <div class="col-span-3 bg-light_bg shadow rounded-lg p-4 h-fit">
+      <div class="col-span-3 bg-light_bg shadow rounded-lg p-4">
         <WorkingTimeTable />
       </div>
     </div>
@@ -117,6 +113,6 @@ const chartOptions = {
 
 <style scoped>
 /* .grid > div {
-  min-height: 200px; 
+  max-height: 200px; 
 } */
 </style>

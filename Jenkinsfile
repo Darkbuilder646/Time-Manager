@@ -1,35 +1,33 @@
 pipeline {
-    agent {
-        docker {
-            image 'docker:20.10.8'
-            args '-v /var/run/docker.sock:/var/run/docker.sock'
-        }
-    }
+    agent any
 
     stages {
-        stage('Docker Compose') {
+        stage('Install Dependencies') {
             steps {
-                script {
-                    sh 'docker-compose -f docker-compose.yml build'
+                // Naviguer vers le dossier du frontend
+                dir('TimeManager_Front') {
+                    // Installer les dépendances
+                    sh 'npm install'
+                }
+            }
+        }
+        
+        stage('Build Frontend') {
+            steps {
+                // Naviguer vers le dossier du frontend et construire le projet
+                dir('TimeManager_Front') {
+                    sh 'npm run build'
                 }
             }
         }
 
-        // stage('Test') {
-        //     steps {
-        //         script {
-        //             sh 'docker-compose -f docker-compose.yml run backend mix test'
-        //             sh 'docker-compose -f docker-compose.yml run frontend npm run test'
-        //         }
-        //     }
-        // }
-
         stage('Deploy') {
             steps {
-                script {
-                    // Ajoute ici les étapes de déploiement
-                    sh 'docker-compose -f docker-compose.yml up -d'
-                }
+                // Cette étape pourrait varier selon la méthode de déploiement choisie.
+                // Par exemple, tu peux utiliser un serveur FTP, ou une commande SSH pour déployer sur un serveur.
+                echo 'Deploying the frontend... Done'
+                // Exemple de déploiement avec une commande SSH
+                // sh 'scp -r TimeManager_Front/dist/* user@server:/path/to/deploy'
             }
         }
     }

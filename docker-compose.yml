@@ -40,8 +40,21 @@ services:
     volumes:
       - ./TimeManager_front:/app
 
+  jenkins:
+    build:
+      context: ./Jenkins
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+    environment:
+      JENKINS_OPTS: --prefix=/jenkins
+
 volumes:
   postgres_data:
+  jenkins_home:
 
 networks:
   app-network:

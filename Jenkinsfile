@@ -7,11 +7,16 @@ pipeline {
     }
 
     stages {
-        stage('List Files') {
+        stage('List Files in front') {
             steps {
                 dir('TimeManager_Front') {
                     sh 'ls -la'
                 }
+            }
+        }
+        stage('List Files global') {
+            steps {
+                sh 'ls -la'
             }
         }
 

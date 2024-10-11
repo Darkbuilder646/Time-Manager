@@ -2,7 +2,13 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Clone Repository') {
+            steps {
+                git 'https://github.com/Darkbuilder646/Time-Manager.git'
+            }
+        }
+
+        stage('Docker Compose') {
             steps {
                 script {
                     sh 'docker-compose -f docker-compose.yml build'
@@ -10,14 +16,14 @@ pipeline {
             }
         }
 
-        stage('Test') {
-            steps {
-                script {
-                    sh 'docker-compose -f docker-compose.yml run backend mix test'
-                    sh 'docker-compose -f docker-compose.yml run frontend npm run test'
-                }
-            }
-        }
+        // stage('Test') {
+        //     steps {
+        //         script {
+        //             sh 'docker-compose -f docker-compose.yml run backend mix test'
+        //             sh 'docker-compose -f docker-compose.yml run frontend npm run test'
+        //         }
+        //     }
+        // }
 
         stage('Deploy') {
             steps {

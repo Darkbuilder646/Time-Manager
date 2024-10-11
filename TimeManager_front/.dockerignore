@@ -1,0 +1,27 @@
+# Fichiers et répertoires spécifiques à Vue.js
+node_modules/
+dist/
+
+# Fichiers de configuration spécifiques à l'environnement de développement
+.env
+.env.local
+.env.*.local
+
+# Fichiers de logs
+*.log
+
+# Fichiers de sauvegarde et fichiers temporaires
+**/*.bak
+**/*.tmp
+
+# Autre fichier
+**/.dockerignore
+**/.git
+**/.gitignore
+**/.vs
+**/.vscode
+**/docker-compose*
+**/compose*
+**/node_modules
+**/build
+.DS_Store

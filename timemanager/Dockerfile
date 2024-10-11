@@ -9,7 +9,6 @@ RUN mix archive.install --force hex phx_new ${PHOENIX_VERSION}
 RUN mix local.rebar --force
 
 COPY mix.exs mix.lock ./
-
 RUN mix deps.get && mix compile
 
 # App Directory
@@ -18,7 +17,7 @@ RUN mkdir -p $APP_HOME
 WORKDIR $APP_HOME
 
 # App Port
-EXPOSE 4000
+EXPOSE 4001
 
 # Default Command
-CMD ["iex", "-S", "mix", "phx.server"]
+CMD ["sh", "-c", "mix ecto.migrate && iex -S mix phx.server"]

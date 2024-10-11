@@ -2,12 +2,6 @@ pipeline {
     agent any
 
     stages {
-        stage('Clone Repository') {
-            steps {
-                git 'https://github.com/Darkbuilder646/Time-Manager.git'
-            }
-        }
-
         stage('Docker Compose') {
             steps {
                 script {

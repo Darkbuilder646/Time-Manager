@@ -4,7 +4,7 @@ import Config
 config :timemanager, Timemanager.Repo,
   username: "admin",
   password: "admin",
-  hostname: "localhost",
+  hostname: "db",
   database: "timemanager_dev",
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,

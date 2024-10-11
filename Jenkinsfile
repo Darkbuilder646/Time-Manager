@@ -4,12 +4,16 @@ pipeline {
             image 'node:20.18.0-alpine3.20' 
             reuseNode true
         }
+        // dockerfile {
+        //     filename 'TimeManager_front/Dockerfile'
+        //     reuseNode true
+        // }
     }
 
     stages {
         stage('List Files in front') {
             steps {
-                dir('TimeManager_Front') {
+                dir('TimeManager_front') {
                     sh 'ls -la'
                 }
             }
@@ -23,7 +27,7 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 // Naviguer vers le dossier du frontend
-                dir('TimeManager_Front') {
+                dir('TimeManager_front') {
                     // Installer les dépendances
                     sh 'npm install'
                 }
@@ -33,7 +37,7 @@ pipeline {
         stage('Build Frontend') {
             steps {
                 // Naviguer vers le dossier du frontend et construire le projet
-                dir('TimeManager_Front') {
+                dir('TimeManager_front') {
                     sh 'npm run build'
                 }
             }

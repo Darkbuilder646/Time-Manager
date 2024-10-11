@@ -5,11 +5,13 @@ pipeline {
             reuseNode true
         }
     }
-    
+
     stages {
-        stage('Node version') {
+        stage('List Files') {
             steps {
-                sh 'node --version'
+                dir('TimeManager_Front') {
+                    sh 'ls -la'
+                }
             }
         }
 

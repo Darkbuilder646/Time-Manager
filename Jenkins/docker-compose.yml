@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  jenkins:
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - "2376:2376"
+      - "50000:50000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+    environment:
+      JENKINS_OPTS: --prefix=/jenkins
+
+volumes:
+  jenkins_home:

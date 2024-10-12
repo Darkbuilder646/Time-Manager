@@ -1,16 +1,47 @@
 version: '3.8'
 
-services:
-  jenkins:
-    build:
-      dockerfile: Dockerfile
-    ports:
-      - "2376:2376"
-      - "50000:50000"
-    volumes:
-      - jenkins_home:/var/jenkins_home
-    environment:
-      JENKINS_OPTS: --prefix=/jenkins
+networks:
+  docker:
 
 volumes:
-  jenkins_home:
+  jenkins-data:
+  jenkins-docker-certs:
+
+services:
+  # Service Jenkins with BlueOcean
+  jenkins:
+    build: .
+    container_name: jenkins-blueocean
+    restart: on-failure # You can use "always" here if you want
+    networks:
+      - docker
+    ports:
+      - 8080:8080
+      - 50000:50000
+    tty: true
+    volumes:
+      - jenkins-data:/var/jenkins_home
+      - jenkins-docker-certs:/certs/client:ro
+    environment:
+      - DOCKER_HOST=tcp://docker:2376
+      - DOCKER_CERT_PATH=/certs/client
+      - DOCKER_TLS_VERIFY=1
+
+  # Service Docker-in-Docker
+  dind:
+    image: docker:dind
+    container_name: docker-dind
+    privileged: true
+    restart: always
+    networks:
+      docker:
+        aliases: 
+          - docker
+    ports:
+      - 2376:2376
+    tty: true
+    volumes:
+      - jenkins-data:/var/jenkins_home
+      - jenkins-docker-certs:/certs/client
+    environment:
+      - DOCKER_TLS_CERTDIR=/certs

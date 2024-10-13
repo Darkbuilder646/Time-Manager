@@ -60,12 +60,6 @@ pipeline {
         // }
 
         stage('Build Docker Image') {
-            agent {
-                docker {
-                    image 'docker:20.10.8'  // Utilise un agent Docker pour cette étape
-                    args '--privileged -v /var/run/docker.sock:/var/run/docker.sock'  // Monte le socket Docker de l'hôte
-                }
-            }
             steps {
                 // Build de l'image Docker pour le back
                 script {
@@ -83,12 +77,6 @@ pipeline {
         }
 
         stage('Deploy local') {
-            agent {
-                docker {
-                    image 'docker:20.10.8'  // Utilise un agent Docker pour cette étape
-                    args '--privileged -v /var/run/docker.sock:/var/run/docker.sock'  // Monte le socket Docker de l'hôte
-                }
-            }
             steps {
                 sh '''
                 docker run -d --name backend_container -p 4000:4000 time-manager-backend:latest

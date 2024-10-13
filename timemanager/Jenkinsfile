@@ -56,9 +56,9 @@ pipeline {
                 failure {
                     echo 'Unit tests failed. Please check the test logs for details.'
                 }
-                always {
-                    junit 'test-results.xml' // Collecte les résultats des tests
-                }
+                // always {
+                //     junit 'test-results.xml' // Collecte les résultats des tests
+                // }
             }
         }
 
@@ -111,9 +111,9 @@ pipeline {
         // }
     }
 
-    post {
-        always {
-            echo 'Pipeline completed.'
-        }
-    }
+    // post {
+    //     always {
+    //         echo 'Pipeline completed.'
+    //     }
+    // }
 }

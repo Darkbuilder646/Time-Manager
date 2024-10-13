@@ -16,17 +16,21 @@ pipeline {
     stages {
         stage('Install Dependencies') {
             steps {
-                // Installe les dépendances
-                sh 'mix local.hex --force'
-                sh 'mix local.rebar --force'
-                sh 'mix deps.get'
+                dir('timemanager') {
+                    // Installe les dépendances
+                    sh 'mix local.hex --force'
+                    sh 'mix local.rebar --force'
+                    sh 'mix deps.get'
+                }
             }
         }
 
         stage('Compile') {
             steps {
-                // Compile le projet
-                sh 'mix compile'
+                dir('timemanager') {
+                    // Compile le projet
+                    sh 'mix compile'
+                }
             }
             post {
                 success {
@@ -40,8 +44,10 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                // Exécute les tests
-                sh 'mix test'
+                dir('timemanager') {
+                    // Exécute les tests
+                    sh 'mix test'
+                }
             }
             post {
                 success {

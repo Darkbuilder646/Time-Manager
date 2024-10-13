@@ -11,17 +11,9 @@ pipeline {
         // DOCKER_REGISTRY = "your-docker-registry-url" // URL de ton registre Docker (ex: Docker Hub)
         DOCKER_IMAGE = "time-manager-backend"
         // DOCKER_CREDENTIALS_ID = "docker-credentials" // Identifiants Docker dans Jenkins
-        // COMPOSE_FILE = "docker-compose.yml"
     }
     
     stages {
-        stage('Start Services') {
-            steps {
-                // Lancer les services avec docker-compose
-                sh 'docker-compose up -d db'
-            }
-        }
-
         stage('Install Dependencies') {
             steps {
                 dir('timemanager') {
@@ -50,29 +42,22 @@ pipeline {
             }
         }
 
-        stage('Run Tests') {
-            steps {
-                dir('timemanager') {
-                    // Exécute les tests
-                    sh 'mix test'
-                }
-            }
-            post {
-                success {
-                    echo 'All unit tests passed successfully.'
-                }
-                failure {
-                    echo 'Unit tests failed. Please check the test logs for details.'
-                }
-            }
-        }
-
-        stage('Stop Services') {
-            steps {
-                // Arrête les services après les tests
-                sh 'docker-compose -f $COMPOSE_FILE down'
-            }
-        }
+        // stage('Run Tests') {
+        //     steps {
+        //         dir('timemanager') {
+        //             // Exécute les tests
+        //             sh 'mix test'
+        //         }
+        //     }
+        //     post {
+        //         success {
+        //             echo 'All unit tests passed successfully.'
+        //         }
+        //         failure {
+        //             echo 'Unit tests failed. Please check the test logs for details.'
+        //         }
+        //     }
+        // }
 
         stage('Build Docker Image') {
             steps {

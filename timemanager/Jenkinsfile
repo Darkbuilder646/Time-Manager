@@ -18,7 +18,8 @@ pipeline {
         stage('Start Services') {
             steps {
                 // Lancer les services avec docker-compose
-                sh 'docker-compose -f $COMPOSE_FILE up -d db'
+                // sh 'docker-compose -f $COMPOSE_FILE up -d db'
+                sh 'ls'
             }
         }
 

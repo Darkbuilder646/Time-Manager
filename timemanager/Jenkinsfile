@@ -11,15 +11,14 @@ pipeline {
         // DOCKER_REGISTRY = "your-docker-registry-url" // URL de ton registre Docker (ex: Docker Hub)
         DOCKER_IMAGE = "time-manager-backend"
         // DOCKER_CREDENTIALS_ID = "docker-credentials" // Identifiants Docker dans Jenkins
-        COMPOSE_FILE = "docker-compose.yml"
+        // COMPOSE_FILE = "docker-compose.yml"
     }
     
     stages {
         stage('Start Services') {
             steps {
                 // Lancer les services avec docker-compose
-                // sh 'docker-compose -f $COMPOSE_FILE up -d db'
-                sh 'ls'
+                sh 'docker-compose up -d db'
             }
         }
 

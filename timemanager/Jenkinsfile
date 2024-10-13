@@ -42,47 +42,47 @@ pipeline {
             }
         }
 
-        // stage('Run Tests') {
-        //     steps {
-        //         dir('timemanager') {
-        //             // Exécute les tests
-        //             sh 'mix test'
-        //         }
-        //     }
-        //     post {
-        //         success {
-        //             echo 'All unit tests passed successfully.'
-        //         }
-        //         failure {
-        //             echo 'Unit tests failed. Please check the test logs for details.'
-        //         }
-        //     }
-        // }
-
-        stage('Build Docker Image') {
+        stage('Run Tests') {
             steps {
-                // Build de l'image Docker pour le back
-                script {
-                    docker.build("${DOCKER_IMAGE}:latest")
+                dir('timemanager') {
+                    // Exécute les tests
+                    sh 'mix test'
                 }
             }
             post {
                 success {
-                    echo 'Docker image built successfully.'
+                    echo 'All unit tests passed successfully.'
                 }
                 failure {
-                    echo 'Docker image build failed. Please check the build configuration and logs.'
+                    echo 'Unit tests failed. Please check the test logs for details.'
                 }
             }
         }
 
-        stage('Deploy local') {
-            steps {
-                sh '''
-                docker run -d --name backend_container -p 4000:4000 time-manager-backend:latest
-                '''
-            }
-        }
+        // stage('Build Docker Image') {
+        //     steps {
+        //         // Build de l'image Docker pour le back
+        //         script {
+        //             docker.build("${DOCKER_IMAGE}:latest")
+        //         }
+        //     }
+        //     post {
+        //         success {
+        //             echo 'Docker image built successfully.'
+        //         }
+        //         failure {
+        //             echo 'Docker image build failed. Please check the build configuration and logs.'
+        //         }
+        //     }
+        // }
+
+        // stage('Deploy local') {
+        //     steps {
+        //         sh '''
+        //         docker run -d --name backend_container -p 4000:4000 time-manager-backend:latest
+        //         '''
+        //     }
+        // }
 
         // stage('Push Docker Image') {
         //     steps {

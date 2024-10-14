@@ -13,6 +13,7 @@ ENV APP_HOME=/app
 WORKDIR $APP_HOME
 
 COPY . .
+COPY .env .env
 
 RUN mix deps.get --only prod
 RUN mix compile

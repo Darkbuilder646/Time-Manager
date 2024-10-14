@@ -8,14 +8,24 @@ RUN mix local.hex --force
 RUN mix archive.install --force hex phx_new ${PHOENIX_VERSION}
 RUN mix local.rebar --force
 
-COPY mix.exs mix.lock ./
-RUN mix deps.get && mix compile
-RUN mix ecto.migrate
+# COPY mix.exs mix.lock ./
+# RUN mix deps.get && mix compile
+# RUN mix ecto.migrate
 
 # App Directory
-ENV APP_HOME /app
-RUN mkdir -p $APP_HOME
+# ENV APP_HOME /app
+# RUN mkdir -p $APP_HOME
+# WORKDIR $APP_HOME
+ENV MIX_ENV=dev
+ENV APP_HOME=/app
 WORKDIR $APP_HOME
+
+COPY . .
+
+RUN mix deps.get --only prod
+RUN mix compile
+
+RUN mix ecto.migrate
 
 # App Port
 EXPOSE 4001

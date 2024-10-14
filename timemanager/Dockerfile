@@ -13,10 +13,11 @@ ENV APP_HOME=/app
 WORKDIR $APP_HOME
 
 COPY . .
-COPY .env .env
 
 RUN mix deps.get --only prod
 RUN mix compile
+
+ENV DATABASE_URL ecto://admin:yKIZKqeHtlLtZaiaBCxYrfvROCPGQcQd@dpg-cs6h2u56l47c73fem020-a/timemanager_prod
 
 RUN mix ecto.create
 RUN mix ecto.migrate

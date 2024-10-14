@@ -6,8 +6,8 @@ config :timemanager, Timemanager.Repo,
   hostname: System.get_env("DB_HOST"),
   database: System.get_env("DB_NAME"),
   stacktrace: true,
-  show_sensitive_data_on_connection_error: false,
-  log: :debug,
+  show_sensitive_data_on_connection_error: true,
+  # log: :debug,
   pool_size: 10
 
 # Note we also include the path to a cache manifest

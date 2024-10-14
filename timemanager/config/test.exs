@@ -10,7 +10,7 @@ config :timemanager, Timemanager.Repo,
   password: "admin",
   hostname: "db",
   # database: "timemanager_test#{System.get_env("MIX_TEST_PARTITION")}",
-  database: "timemanager_dev#{System.get_env("MIX_TEST_PARTITION")}",
+  database: "timemanager_dev",
   pool: Ecto.Adapters.SQL.Sandbox,
   pool_size: System.schedulers_online() * 2
 

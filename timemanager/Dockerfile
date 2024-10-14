@@ -18,6 +18,7 @@ RUN mix deps.get --only prod
 RUN mix compile
 
 ENV DATABASE_URL ecto://admin:yKIZKqeHtlLtZaiaBCxYrfvROCPGQcQd@dpg-cs6h2u56l47c73fem020-a/timemanager_prod
+ENV SECRET_KEY_BASE 0/oj87VZ7VIAnk+kxVPUgP4l476zmbkUiqrG3TIAaZRVdXpMiAI8ZJMbtYXrZW+5
 
 RUN mix ecto.create
 RUN mix ecto.migrate

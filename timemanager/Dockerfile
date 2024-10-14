@@ -10,6 +10,7 @@ RUN mix local.rebar --force
 
 COPY mix.exs mix.lock ./
 RUN mix deps.get && mix compile
+RUN mix ecto.migrate
 
 # App Directory
 ENV APP_HOME /app
@@ -21,3 +22,4 @@ EXPOSE 4001
 
 # Default Command
 CMD ["sh", "-c", "mix ecto.migrate && iex -S mix phx.server"]
+# CMD ["iex -S mix phx.server"]

@@ -4,9 +4,11 @@ on:
   push:
     branches:
       - dev
+      - main
   pull_request:
     branches:
       - dev
+      - main
 
 jobs:
   build:
@@ -33,7 +35,12 @@ jobs:
       working-directory: ./TimeManager_front
       run: npm run build
 
+      # Main only
     - name: Deploy
-      run: echo "Deploying the frontend..."
-      # Ajoute ici les commandes de déploiement nécessaires.
-      # Par exemple: scp -r ./TimeManager_front/dist/* user@server:/path/to/deploy
+      if: github.ref == 'refs/heads/main'  
+      run: |
+        curl -X POST \
+          -H "Authorization: Bearer ${{ secrets.DEPLOY_API_KEY }}" \
+          -H "Content-Type: application/json" \
+          -d '{}' \
+          https://api.render.com/v1/services/srv-cs6igbrtq21c73dt5ot0/deploys

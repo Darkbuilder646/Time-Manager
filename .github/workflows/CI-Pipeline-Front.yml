@@ -5,13 +5,18 @@ on:
     branches:
       - dev
       - main
+    paths:
+      - 'TimeManager_front/**'
   pull_request:
     branches:
       - dev
       - main
+    paths:
+      - 'TimeManager_front/**'
 
 jobs:
   build:
+    name: Build Frontend
     runs-on: ubuntu-latest
 
     steps:
@@ -62,8 +67,11 @@ jobs:
             if [ "$DEPLOY_STATUS" == "live" ]; then
               echo "Deployment succeeded!"
               break
-            elif [ "$DEPLOY_STATUS" == "failed" ]; then
-              echo "Deployment failed!"
+            elif [ "$DEPLOY_STATUS" == "build_failed" ]; then
+              echo "Deployment build failed!"
+              exit 1
+            elif [ "$DEPLOY_STATUS" == "update_failed" ]; then
+              echo "Deployment update failed!"
               exit 1
             elif [ "$DEPLOY_STATUS" == "canceled" ]; then
               echo "Deployment was canceled!"
@@ -71,10 +79,10 @@ jobs:
             fi
 
            sleep 10
-          done
+          done  
           
           if [ "$DEPLOY_STATUS" != "live" ]; then
             echo "Deployment timeout or unknown state!"
             exit 1
           fi
-          
+

@@ -1,0 +1,68 @@
+name: CI Back
+
+on:
+  push:
+    branches:
+      - dev
+      - main
+    paths:
+      - 'timemanager/**'
+  pull_request:
+    branches:
+      - dev
+      - main
+    paths:
+      - 'timemanager/**'
+
+env:
+  MIX_ENV: test
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build Backend
+    # Set up a Postgres DB service. By default, Phoenix applications
+    # use Postgres. This creates a database for running tests.
+    # Additional services can be defined here if required.
+    services:
+      db:
+        image: postgres:16
+        ports: ['5432:5432']
+        env:
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        otp: ['26']
+        elixir: ['1.15.7'] 
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Elixir
+        uses: actions/setup-elixir@v1
+        with:
+          otp-version: ${{matrix.otp}}
+          elixir-version: ${{matrix.elixir}}
+
+      - name: Install Dependencies
+        working-directory: ./timemanager
+        run: mix deps.get
+
+      - name: Run Tests
+        working-directory: ./timemanager
+        run: mix test
+
+      - name: Deploy Backend
+        run: |
+          echo "Deploying the backend..."

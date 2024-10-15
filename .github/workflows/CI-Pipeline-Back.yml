@@ -5,8 +5,8 @@ on:
     branches:
       - dev
       - main
-    paths:
-      - 'timemanager/**'
+    # paths:
+    #   - 'timemanager/**'
   pull_request:
     branches:
       - dev
@@ -42,7 +42,7 @@ jobs:
 
     strategy:
       matrix:
-        otp: ['26']
+        otp: ['26.x']
         elixir: ['1.15.7'] 
 
     steps:

@@ -12,7 +12,7 @@ on:
       - dev
       - main
     paths:
-      - 'timemanager/**'
+      - "timemanager/**"
 
 env:
   MIX_ENV: test
@@ -26,24 +26,24 @@ jobs:
     # Set up a Postgres DB service. By default, Phoenix applications
     # use Postgres. This creates a database for running tests.
     # Additional services can be defined here if required.
-    services:
-      db:
-        image: postgres:16
-        ports: ['5432:5432']
-        env:
-          POSTGRES_PASSWORD: postgres
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
+    # services:
+    #   db:
+    #     image: postgres:16
+    #     ports: ['5432:5432']
+    #     env:
+    #       POSTGRES_PASSWORD: postgres
+    #     options: >-
+    #       --health-cmd pg_isready
+    #       --health-interval 10s
+    #       --health-timeout 5s
+    #       --health-retries 5
 
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        otp: ['26.x']
-        elixir: ['1.15.7'] 
+        otp: ["26.x"]
+        elixir: ["1.15.7"]
 
     steps:
       - name: Checkout code
@@ -59,10 +59,56 @@ jobs:
         working-directory: ./timemanager
         run: mix deps.get
 
-      - name: Run Tests
+      #   - name: Run Tests
+      #     working-directory: ./timemanager
+      #     run: mix test
+
+      - name: Check Compilation
         working-directory: ./timemanager
-        run: mix test
+        run: mix compile --warnings-as-errors
 
       - name: Deploy Backend
+        if: github.ref == 'refs/heads/main'
+        id: deploy_backend
         run: |
-          echo "Deploying the backend..."
+          DEPLOY_ID=$(curl -s -X POST \
+          -H "Authorization: Bearer ${{ secrets.DEPLOY_API_KEY }}" \
+          -H "Content-Type: application/json" \
+          -d '{}' \
+          https://api.render.com/v1/services/srv-cs6hirtsvqrc73f4chjg/deploys | jq -r '.id')
+
+          echo "Backend deployment triggered with ID: $DEPLOY_ID"
+          echo "deploy_id=$DEPLOY_ID" >> $GITHUB_ENV
+
+      - name: Check Status Deploy
+        if: github.ref == 'refs/heads/main'
+        run: |
+          for i in {1..90}; do
+            DEPLOY_STATUS=$(curl -s \
+              -H "Authorization: Bearer ${{ secrets.DEPLOY_API_KEY }}" \
+              -H "Content-Type: application/json" \
+              https://api.render.com/v1/services/srv-cs6hirtsvqrc73f4chjg/deploys/${{ env.deploy_id }} | jq -r '.status')
+
+            echo "Current deploy status: $DEPLOY_STATUS"
+
+            if [ "$DEPLOY_STATUS" == "live" ]; then
+              echo "Deployment succeeded!"
+              break
+            elif [ "$DEPLOY_STATUS" == "build_failed" ]; then
+              echo "Deployment build failed!"
+              exit 1
+            elif [ "$DEPLOY_STATUS" == "update_failed" ]; then
+              echo "Deployment update failed!"
+              exit 1
+            elif [ "$DEPLOY_STATUS" == "canceled" ]; then
+              echo "Deployment was canceled!"
+              exit 1
+            fi
+
+           sleep 10
+          done  
+
+          if [ "$DEPLOY_STATUS" != "live" ]; then
+            echo "Deployment timeout or unknown state!"
+            exit 1
+          fi

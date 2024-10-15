@@ -41,8 +41,9 @@ jobs:
       run: npm run build
 
       # Main only
-    - name: Deploy
+    - name: Deploy Frontend
       if: github.ref == 'refs/heads/main'  
+      id: deploy_frontend
       run: |
         DEPLOY_ID=$(curl -s -X POST \
           -H "Authorization: Bearer ${{ secrets.DEPLOY_API_KEY }}" \
@@ -53,7 +54,7 @@ jobs:
           echo "Backend deployment triggered with ID: $DEPLOY_ID"
           echo "deploy_id=$DEPLOY_ID" >> $GITHUB_ENV
 
-    - name: Deploy
+    - name: Check Status Deploy
       if: github.ref == 'refs/heads/main'  
       run: |
           for i in {1..90}; do

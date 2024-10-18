@@ -32,9 +32,9 @@ jobs:
       working-directory: ./TimeManager_front
       run: npm install
 
-    - name: Run Unit Tests
+    - name: Run Unit Tests & Coverage
       working-directory: ./TimeManager_front
-      run: npm run test:unit
+      run: npm run test:coverage
 
     - name: Build Frontend
       working-directory: ./TimeManager_front

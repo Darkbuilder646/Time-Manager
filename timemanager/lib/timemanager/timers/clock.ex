@@ -1,6 +1,7 @@
 defmodule Timemanager.Timers.Clock do
   use Ecto.Schema
 
+  @derive {Jason.Encoder, only: [:id, :time, :status, :user_id, :inserted_at, :updated_at]}
   schema "clocks" do
     field :time, :utc_datetime
     field :status, :boolean, default: true

@@ -5,8 +5,8 @@ on:
     branches:
       - dev
       - main
-    # paths:
-    #   - 'timemanager/**'
+    paths:
+      - 'timemanager/**'
   pull_request:
     branches:
       - dev

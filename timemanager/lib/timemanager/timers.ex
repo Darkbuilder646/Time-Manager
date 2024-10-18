@@ -37,6 +37,21 @@ defmodule Timemanager.Timers do
   """
   def get_clock!(id), do: Repo.get!(Clock, id)
 
+  def get_clocks_by_user(user_id) do
+    from(c in Clock, where: c.user_id == ^user_id)
+    |> Repo.all()
+  end
+
+  def working_state(user_id) do
+    last_clock = from(c in Clock, where: c.user_id == ^user_id, order_by: [desc: c.time], limit: 1)
+    |> Repo.one()
+
+    case last_clock do
+      nil -> true
+      %Clock{status: status} -> !status
+    end
+  end
+
   @doc """
   Creates a clock.
 
@@ -113,11 +128,35 @@ defmodule Timemanager.Timers do
       [%WorkingTime{}, ...]
 
   """
-  def list_workingtimes do
-    Repo.all(WorkingTime)
+  def list_workingtimes(params) do
+    params = Map.put(params, "ending", Map.get(params, "end"))
+    WorkingTime
+    |> build_query(params)
+    |> Repo.all()
   end
 
-  @doc """
+  defp build_query(query, %{"start" => start, "end" => ending, "user_id" => user_id}) when is_binary(start) and is_binary(ending) and is_binary(user_id) do
+    from u in query,
+    where: u.start >= ^start and u.end <= ^ending and u.user_id == ^user_id
+  end
+
+  defp build_query(query, %{"start" => start, "user_id" => user_id}) when is_binary(start) and is_binary(user_id) do
+    from u in query,
+    where: u.start >= ^start and u.user_id == ^user_id
+  end
+
+  defp build_query(query, %{"end" => ending, "user_id" => user_id}) when is_binary(ending) and is_binary(user_id) do
+    from u in query,
+    where: u.end <= ^ending and u.user_id == ^user_id
+  end
+
+  defp build_query(query, %{"user_id" => user_id}) when is_binary(user_id) do
+    from u in query,
+    where: u.user_id == ^user_id
+  end
+
+@doc """
+
   Gets a single working_time.
 
   Raises `Ecto.NoResultsError` if the Working time does not exist.
@@ -131,7 +170,11 @@ defmodule Timemanager.Timers do
       ** (Ecto.NoResultsError)
 
   """
-  def get_working_time!(id), do: Repo.get!(WorkingTime, id)
+  def get_working_time!(user_id, id) do
+    Repo.get_by!(WorkingTime, id: id, user_id: user_id)
+  end
+
+  def get_working_time_by_id!(id), do: Repo.get!(WorkingTime, id)
 
   @doc """
   Creates a working_time.

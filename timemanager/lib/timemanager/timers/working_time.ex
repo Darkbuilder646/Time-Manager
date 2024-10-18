@@ -1,6 +1,8 @@
 defmodule Timemanager.Timers.WorkingTime do
   use Ecto.Schema
+  import Ecto.Changeset
 
+  @derive {Jason.Encoder, only: [:id, :start, :end, :user_id, :inserted_at, :updated_at]}
   schema "workingtimes" do
     field :start, :utc_datetime
     field :end, :utc_datetime
@@ -10,11 +12,10 @@ defmodule Timemanager.Timers.WorkingTime do
   end
 
   @doc false
+  @derive Jason.Encoder
   def changeset(workingtime, params \\ %{}) do
     workingtime
-    |> Ecto.Changeset.cast(params, [:start, :end, :user_id])
-    |> Ecto.Changeset.validate_required([:start, :end, :user_id], message: "can't be null")
-    |> Ecto.Changeset.validate_format(:start, ~r/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01]) (0[0-9]|1[0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9]|\d{2})$/, message: "YYYY-MM-DD HH:mm:ss")
-    |> Ecto.Changeset.validate_format(:end, ~r/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01]) (0[0-9]|1[0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9]|\d{2})$/, message: "YYYY-MM-DD HH:mm:ss")
+    |> cast(params, [:start, :end, :user_id])
+    |> validate_required([:start, :end, :user_id])
   end
 end

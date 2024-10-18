@@ -25,8 +25,8 @@ WORKDIR $APP_HOME
 EXPOSE 4001
 
 # Default command (with a script to conditionally handle ecto tasks)
-COPY entrypoint.sh ${APP_HOME}/entrypoint.sh
-RUN chmod +x ${APP_HOME}/entrypoint.sh
+COPY entrypoint.sh /app/entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["mix", "phx.server"]

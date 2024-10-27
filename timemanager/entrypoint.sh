@@ -15,4 +15,4 @@ else
 fi
 
 # Démarrer le serveur Phoenix
-exec "$@"
+exec mix phx.server

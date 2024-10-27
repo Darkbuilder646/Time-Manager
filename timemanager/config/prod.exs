@@ -16,7 +16,8 @@ config :timemanager, Timemanager.Repo,
 # which you should run after static files are built and
 # before starting your production server.
 config :timemanager, TimemanagerWeb.Endpoint,
-  cache_static_manifest: "priv/static/cache_manifest.json"
+  cache_static_manifest: "priv/static/cache_manifest.json",
+  http: [ip: {0, 0, 0, 0}, port: 4001]
 
 # Configures Swoosh API Client
 config :swoosh, api_client: Swoosh.ApiClient.Finch, finch_name: Timemanager.Finch

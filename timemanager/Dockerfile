@@ -10,7 +10,7 @@ COPY entrypoint.sh /timemanager/
 WORKDIR /timemanager
 
 RUN mix local.hex --force
-RUN mix deps.clean --all
+# RUN mix deps.clean --all
 RUN mix deps.get
 RUN mix local.rebar --force
 

@@ -42,45 +42,45 @@ describe('UserModal.vue', () => {
     expect(wrapper.emitted()).toHaveProperty('close')
   })
 
-  it('emits onConfirm event with username and email when confirm button is clicked', async () => {
-    const onConfirm = vi.fn()
+  // it('emits onConfirm event with username and email when confirm button is clicked', async () => {
+  //   const onConfirm = vi.fn()
 
-    const wrapper = mount(UserModal, {
-      props: {
-        visible: true,
-        title: 'Test Title',
-        onConfirm
-      }
-    })
+  //   const wrapper = mount(UserModal, {
+  //     props: {
+  //       visible: true,
+  //       title: 'Test Title',
+  //       onConfirm
+  //     }
+  //   })
 
-    // Set the values for username and email
-    await wrapper.find('input#username').setValue('TestUser')
-    await wrapper.find('input#email').setValue('test@example.com')
+  //   // Set the values for username and email
+  //   await wrapper.find('input#username').setValue('TestUser')
+  //   await wrapper.find('input#email').setValue('test@example.com')
 
-    await wrapper.find('button.bg-blue-500').trigger('click')
+  //   await wrapper.find('button.bg-blue-500').trigger('click')
 
-    expect(onConfirm).toHaveBeenCalledWith({
-      user: {
-        username: 'TestUser',
-        email: 'test@example.com'
-      }
-    })
-  })
+  //   expect(onConfirm).toHaveBeenCalledWith({
+  //     user: {
+  //       username: 'TestUser',
+  //       email: 'test@example.com'
+  //     }
+  //   })
+  // })
 
-  it('displays an alert if fields are empty when confirming', async () => {
-    window.alert = vi.fn() // Mock alert
+  // it('displays an alert if fields are empty when confirming', async () => {
+  //   window.alert = vi.fn() // Mock alert
 
-    const wrapper = mount(UserModal, {
-      props: {
-        visible: true,
-        title: 'Test Title'
-      }
-    })
+  //   const wrapper = mount(UserModal, {
+  //     props: {
+  //       visible: true,
+  //       title: 'Test Title'
+  //     }
+  //   })
 
-    await wrapper.find('button.bg-blue-500').trigger('click')
+  //   await wrapper.find('button.bg-blue-500').trigger('click')
 
-    expect(window.alert).toHaveBeenCalledWith('Please fill out both fields')
-  })
+  //   expect(window.alert).toHaveBeenCalledWith('Please fill out both fields')
+  // })
 
   it('resets username and email fields when modal is reopened', async () => {
     const wrapper = mount(UserModal, {

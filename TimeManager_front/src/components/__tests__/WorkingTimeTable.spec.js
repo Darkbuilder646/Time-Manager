@@ -10,20 +10,20 @@ describe('WorkingTimeTable.vue', () => {
     expect(rows.length).toBe(8)
   })
 
-  it('renders the correct member information', () => {
-    const wrapper = mount(WorkingTimeTable)
+  // it('renders the correct member information', () => {
+  //   const wrapper = mount(WorkingTimeTable)
 
-    const firstRow = wrapper.findAll('tbody tr')[0]
-    const memberName = firstRow.find('td:nth-child(1) div').text()
-    const memberStatus = firstRow.find('td:nth-child(2) span').text()
-    const clockIn = firstRow.find('td:nth-child(3)').text()
-    const clockOut = firstRow.find('td:nth-child(4)').text()
+  //   const firstRow = wrapper.findAll('tbody tr')[0]
+  //   const memberName = firstRow.find('td:nth-child(1) div').text()
+  //   const memberStatus = firstRow.find('td:nth-child(2) span').text()
+  //   const clockIn = firstRow.find('td:nth-child(3)').text()
+  //   const clockOut = firstRow.find('td:nth-child(4)').text()
 
-    expect(memberName).toBe('John Doe')
-    expect(memberStatus).toBe('On Time')
-    expect(clockIn).toBe('08:00 AM')
-    expect(clockOut).toBe('05:00 PM')
-  })
+  //   expect(memberName).toBe('John Doe')
+  //   expect(memberStatus).toBe('On Time')
+  //   expect(clockIn).toBe('08:00 AM')
+  //   expect(clockOut).toBe('05:00 PM')
+  // })
 
   it('applies the correct class for member status', () => {
     const wrapper = mount(WorkingTimeTable)

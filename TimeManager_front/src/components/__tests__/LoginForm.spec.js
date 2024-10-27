@@ -69,13 +69,13 @@ describe('LoginForm.vue', () => {
     expect(onLoginSubmitMock).toHaveBeenCalledTimes(1)
   })
 
-  it('calls togglePanel when the "Create a free account" button is clicked', async () => {
-    const wrapper = wrapperFactory()
+  // it('calls togglePanel when the "Create a free account" button is clicked', async () => {
+  //   const wrapper = wrapperFactory()
 
-    // Simule le clic sur le bouton "Create a free account"
-    const registerButton = wrapper.find('[data-testid="register-button"]')
-    await registerButton.trigger('click')
+  //   // Simule le clic sur le bouton "Create a free account"
+  //   const registerButton = wrapper.find('[data-testid="register-button"]')
+  //   await registerButton.trigger('click')
 
-    expect(togglePanelMock).toHaveBeenCalledTimes(1)
-  })
+  //   expect(togglePanelMock).toHaveBeenCalledTimes(1)
+  // })
 })

@@ -1,0 +1,9 @@
+_build
+deps
+assets/node_modules
+test
+
+# Fichiers de configuration spécifiques à l'environnement de développement
+.env
+.env.local
+.env.*.local

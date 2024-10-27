@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: timemanager_dev
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app-network
+    ports:
+      - 5432:5432
+
+  backend:
+    build:
+      context: ./timemanager
+      dockerfile: Dockerfile
+    environment:
+      DATABASE_URL: postgres://admin:admin@db:5432/timemanager_dev
+    depends_on:
+      - db
+    ports:
+      - "4001:4001"
+    networks:
+      - app-network
+    volumes:
+      - ./timemanager:/app
+
+  frontend:
+    build:
+      context: ./TimeManager_front
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    networks:
+      - app-network
+    volumes:
+      - ./TimeManager_front:/app
+
+volumes:
+  postgres_data:
+
+networks:
+  app-network:
+    driver: bridge

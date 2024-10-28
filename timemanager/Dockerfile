@@ -2,10 +2,12 @@ FROM elixir:1.16.1-alpine
 
 # test installation dépendance pour bcrypt
 RUN apk add --no-cache build-base
+RUN apk update && apk add postgresql-client
 
 RUN mkdir /timemanager
 COPY . /timemanager/
 COPY entrypoint.sh /timemanager/
+COPY seed_data.sql /timemanager/
 
 WORKDIR /timemanager
 

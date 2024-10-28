@@ -12,6 +12,9 @@ else
   mix ecto.drop
   mix ecto.create
   mix ecto.migrate
+  echo "Inserting test data..."
+  export PGPASSWORD="admin"
+  psql -h db -U admin -d timemanager_dev -f /timemanager/seed_data.sql
 fi
 
 # Démarrer le serveur Phoenix

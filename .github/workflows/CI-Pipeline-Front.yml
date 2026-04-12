@@ -26,11 +26,11 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '20.18.0'
+        node-version: '22.12.0'
 
     - name: Install Dependencies
       working-directory: ./TimeManager_front
-      run: npm install
+      run: npm ci
 
     - name: Run Unit Tests & Coverage
       working-directory: ./TimeManager_front

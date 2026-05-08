@@ -16,7 +16,7 @@
   "dependencies": {
     "@popperjs/core": "^2.11.8",
     "@vueuse/core": "^11.1.0",
-    "axios": "^1.15.0",
+    "axios": "^1.15.2",
     "chart.js": "^4.4.4",
     "dotenv": "^16.4.5",
     "moment": "^2.30.1",
